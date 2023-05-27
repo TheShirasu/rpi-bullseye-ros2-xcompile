@@ -1,8 +1,8 @@
 FROM arm64v8/debian:bullseye
 
-ARG DISTRO=humble
-ARG VERSION=0.3.0
-ARG DATE=20221215
+ARG DISTRO=iron
+ARG VERSION=0.3.2
+ARG DATE=20230525
 ARG ARCH=arm64
 
 ENV TZ=Asia/Tokyo
@@ -118,13 +118,12 @@ RUN apt update && \
 #     rm -rf libcamera
 
 
-# Downloading ros-humble and unzip
+# Downloading ros-iron and unzip
 
 WORKDIR /ros2_ws
-RUN wget -qO - https://s3.ap-northeast-1.wasabisys.com/rpi-raspbian-ros2/default.gpg | apt-key add - && \
-    echo "deb https://s3.ap-northeast-1.wasabisys.com/rpi-raspbian-ros2 bullseye humble" | tee /etc/apt/sources.list.d/ros2-bullseye.list && \
+RUN wget https://github.com/TheShirasu/rpi-bullseye-ros2-xz/releases/download/ros-iron-desktop-0.3.2/ros-iron-desktop-0.3.2_20230525_arm64_xz.deb && \
     apt update && \
-    apt install ros-humble-desktop
+    apt install -y ./ros-iron-desktop-0.3.2_20230525_arm64_xz.deb
     
 
 # install additional packages
